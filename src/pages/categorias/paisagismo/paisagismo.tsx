@@ -10,7 +10,7 @@ import vaso4 from "../../../assets/categorias/paisagismo/lixeira-dupla-funcao.jp
 import vaso5 from "../../../assets/categorias/paisagismo/vaso-modelo-canvas.jpg";
 import vaso6 from "../../../assets/categorias/paisagismo/vaso-modelo-circular.jpg";
 import vaso10 from "../../../assets/categorias/paisagismo/vaso-modelo-domo.jpg";
-import vaso7 from "../../../assets/categorias/paisagismo/vaso-modelo-canvas.jpg";
+// import vaso7 from "../../../assets/categorias/paisagismo/vaso-modelo-canvas.jpg";
 import vaso8 from "../../../assets/categorias/paisagismo/vaso-modelo-quadrado.jpg";
 import vaso9 from "../../../assets/categorias/paisagismo/vasos-geometricos.jpg";
 

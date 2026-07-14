@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Suas importações de imagens
@@ -61,15 +61,6 @@ export function Carrossel() {
     return () => clearInterval(timer);
   }, [currentIndex]);
 
-  const handleDragEnd = (event: any, info: any) => {
-    const swipeThreshold = 50;
-    if (info.offset.x < -swipeThreshold) {
-      handleNext();
-    } else if (info.offset.x > swipeThreshold) {
-      handlePrev();
-    }
-  };
-
   // Variantes ajustadas para um efeito de transição sutil e cinematográfico
   const slideVariants = {
     enter: (dir: number) => ({
@@ -112,7 +103,15 @@ export function Carrossel() {
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.4}
-            onDragEnd={handleDragEnd}
+            // Tratamento do drag simplificado com inferência automática de tipos pelo TS
+            onDragEnd={(_, info) => {
+              const swipeThreshold = 50;
+              if (info.offset.x < -swipeThreshold) {
+                handleNext();
+              } else if (info.offset.x > swipeThreshold) {
+                handlePrev();
+              }
+            }}
             className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing flex flex-col justify-between"
           >
             <div className="w-full h-full relative">
