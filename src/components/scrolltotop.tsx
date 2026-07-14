@@ -32,7 +32,7 @@ export default function ScrollToTop() {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-5 right-5 z-50 p-3 rounded-full bg-blue-600 text-white shadow-lg transition-all duration-300 hover:bg-blue-700 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="fixed bottom-5 right-5 z-50 p-3 rounded-full bg-amber-600 text-white shadow-lg transition-all duration-300 hover:bg-amber-700 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
           aria-label="Voltar ao topo"
         >
           {/* Ícone de Seta para Cima (SVG simples) */}
