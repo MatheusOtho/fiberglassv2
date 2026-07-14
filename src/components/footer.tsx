@@ -57,7 +57,7 @@ export function Footer() {
               Endereço
             </h4>
             <p className="text-zinc-400 text-sm leading-relaxed mb-5">
-              Rua Joaquim Cardoso Filho, 704
+              Estrada Joaquim Cardoso Filho, 704
               <br />
               06872-200 — Potuverá
               <br />
