@@ -2,6 +2,7 @@
   import { BrowserRouter, Routes, Route } from "react-router-dom";
   import Header from "./components/header";
   import Footer from "./components/footer";
+  import ScrollToTop from "./components/scrolltotop"
 
   import Home from "./pages/home";
   import Contato from "./pages/contato"
@@ -60,6 +61,7 @@
             <Route path="/categoria-projetos-especiais/:slug" element={<DetalhesProjetosEspeciais />} /> 
           </Routes>
           <Footer />
+          <ScrollToTop />
         </BrowserRouter>
       </>
     )

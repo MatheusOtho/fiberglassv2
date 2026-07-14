@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 interface SocialLink {
   href: string;
@@ -31,6 +32,11 @@ const socialLinks: SocialLink[] = [
 
 
 export default function Contato(): React.JSX.Element {
+
+  useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [])
+
   return (
     <section
       id="contato"

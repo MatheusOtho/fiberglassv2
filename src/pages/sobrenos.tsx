@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 // Interfaces para tipagem estrita
 interface Especialidade {
@@ -44,6 +45,11 @@ const valores: ValorItem[] = [
 ];
 
 export default function SobreNos(): React.JSX.Element {
+
+  useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [])
+  
   return (
     <section 
       id="sobrenos" 
