@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 // Importações dos assets fornecidos para a categoria Mesass
 import projeto1 from "../../../assets/categorias/projetosespeciais/escorregador-em-fibra-modelo-1.jpg";
 import projeto2 from "../../../assets/categorias/projetosespeciais/escorregador-em-fibra-modelo-2.jpg";
+import { Helmet } from 'react-helmet-async';
 
 import bannerProjetosEspeciais from "../../../assets/categorias/projetosespeciais/bannerProjetosEspeciais.jpg";
 
@@ -38,6 +39,10 @@ export function ProjetosEspeciais() {
   ];
 
   return (
+    <>
+      <Helmet>
+        <title>FiberGlass Móveis | Projetos em Fibra de Vidro</title>
+      </Helmet>
     <main className="min-h-screen bg-[#fafafa] pb-24 mt-20 selection:bg-amber-600 selection:text-white">
       
       {/* Banner Superior Premium */}
@@ -145,6 +150,7 @@ export function ProjetosEspeciais() {
 
       </section>
     </main>
+    </>
   );
 }
 

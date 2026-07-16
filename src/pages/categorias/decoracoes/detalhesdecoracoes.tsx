@@ -43,7 +43,7 @@ export function DetalhesDecoracoes() {
       complementoDescricao: "Ideal para quem deseja criar uma decoração de Natal elegante e marcante. Perfeito para shoppings, lojas, centros comerciais, empresas e outros ambientes que buscam valorizar o clima natalino com peças exclusivas.",
     },
     {
-      name: "Modelo Circular",
+      name: "Modulo Circular",
       slug: "/categoria-decoracoes/modulo-circular",
       img: decoracao3,
       categoryLabel: "Decoração Inovadora",
@@ -89,10 +89,15 @@ export function DetalhesDecoracoes() {
   // Filtra e encontra a poltrona ativa na rota
   const produto = produtos.find((p) => p.slug === currentSlug);
 
-  // Força o scroll para o topo ao renderizar a página do produto
+  // Força o scroll para o topo e define o título do navegador dinamicamente
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [currentSlug]);
+    
+    if (produto) {
+      document.title = `FiberGlass Móveis | ${produto.name}`;
+    }
+  }, [currentSlug, produto]); // Roda sempre que a rota mudar ou o produto for encontrado
+
 
   // Fallback caso o slug não coincida com nenhum produto mapeado
   if (!produto) {

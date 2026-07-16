@@ -9,6 +9,7 @@ import mesa3 from "../../../assets/categorias/mesas/mesa-modelo-cone-2.jpg";
 import mesa4 from "../../../assets/categorias/mesas/mesa-modelo-cone.jpg";
 import mesa5 from "../../../assets/categorias/mesas/mesa-modelo-mushroom.jpg";
 import mesa6 from "../../../assets/categorias/mesas/mesa-modelo-side.jpg";
+import { Helmet } from 'react-helmet-async';
 
 import bannerMesas from "../../../assets/categorias/mesas/bannerMesas.jpg";
 
@@ -66,6 +67,10 @@ export function Mesas() {
   ];
 
   return (
+    <>
+      <Helmet>
+        <title>FiberGlass Móveis | Mesas em Fibra de Vidro</title>
+      </Helmet>
     <main className="min-h-screen bg-[#fafafa] pb-24 mt-20 selection:bg-amber-600 selection:text-white">
       
       {/* Banner Superior Premium */}
@@ -173,6 +178,7 @@ export function Mesas() {
 
       </section>
     </main>
+    </>
   );
 }
 

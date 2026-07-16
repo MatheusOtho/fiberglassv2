@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { Helmet } from 'react-helmet-async';
 
 // Interfaces para tipagem estrita
 interface Especialidade {
@@ -51,6 +52,11 @@ export default function SobreNos(): React.JSX.Element {
     }, [])
   
   return (
+    <>
+      <Helmet>
+        <title>FiberGlass Móveis | Sobre Nós</title>
+      </Helmet>
+
     <section 
       id="sobrenos" 
       className="py-20 sm:py-28 bg-zinc-50 border-b border-zinc-200/50 relative overflow-hidden"
@@ -255,5 +261,6 @@ export default function SobreNos(): React.JSX.Element {
 
       </div>
     </section>
+    </>
   );
 }

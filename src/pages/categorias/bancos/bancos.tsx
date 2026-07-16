@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from 'react-helmet-async';
 
 import banco1 from "../../../assets/categorias/bancos/banco-safira.jpeg";
 import banco2 from "../../../assets/categorias/bancos/banco-tablet.jpeg";
@@ -37,6 +38,10 @@ export function Bancos() {
   ];
 
   return (
+    <>
+      <Helmet>
+        <title>FiberGlass Móveis | Bancos em Fibra de Vidro</title>
+      </Helmet>
     <main className="min-h-screen bg-[#fafafa] pb-24 mt-20 selection:bg-amber-600 selection:text-white">
       
       {/* Banner Superior Premium */}
@@ -144,6 +149,7 @@ export function Bancos() {
 
       </section>
     </main>
+    </>
   );
 }
 

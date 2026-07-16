@@ -10,6 +10,7 @@ import decoracao5 from "../../../assets/categorias/decoracoes/torre-bolas-natali
 import decoracao6 from "../../../assets/categorias/decoracoes/urso-natalino-modelo-1.jpg";
 import decoracao7 from "../../../assets/categorias/decoracoes/urso-natalino-modelo-2.jpg";
 import decoracao8 from "../../../assets/categorias/decoracoes/urso-natalino-modelo-3.jpg";
+import { Helmet } from 'react-helmet-async';
 
 import bannerDecoracoes from "../../../assets/categorias/decoracoes/bannerDecoracoes.jpg";
 
@@ -41,7 +42,7 @@ export function Decoracoes() {
       categoryLabel: "Design Natalino",
     },
     {
-      name: "Modelo Circular",
+      name: "Modulo Circular",
       slug: "/categoria-decoracoes/modulo-circular",
       img: decoracao3,
       categoryLabel: "Decoração Inovadora",
@@ -79,6 +80,10 @@ export function Decoracoes() {
   ];
 
   return (
+    <>
+    <Helmet>
+        <title>FiberGlass Móveis | Decorações em Fibra de Vidro</title>
+    </Helmet>
     <main className="min-h-screen bg-[#fafafa] pb-24 mt-20 selection:bg-amber-600 selection:text-white">
       
       {/* Banner Superior Premium */}
@@ -186,6 +191,7 @@ export function Decoracoes() {
 
       </section>
     </main>
+    </>
   );
 }
 

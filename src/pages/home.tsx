@@ -5,6 +5,7 @@ import Carrossel from "./home/carrossel"
 import Personalizados from "./home/personalizado"
 import Categorias from "./home/categorias"
 import Destaques from "./home/destaques"
+import { Helmet } from 'react-helmet-async';
 
 function Home() {
 
@@ -14,6 +15,9 @@ function Home() {
 
   return (
     <>
+      <Helmet>
+        <title>FiberGlass Móveis | Móveis em Fibra de Vidro</title>
+      </Helmet>
         <main className="max-w-[1600px] m-auto">
           
             <Hero/>

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from 'react-helmet-async';
 
 // Importações dos assets fornecidos para a categoria Mesass
 import cadeira1 from "../../../assets/categorias/cadeiras-eroticas/cadeira-erotica-modelo-kiss-2.jpeg";
@@ -40,6 +41,10 @@ export function CadeirasEroticas() {
   ];
 
   return (
+    <>
+    <Helmet>
+        <title>FiberGlass Móveis | Cadeiras Eróticas em Fibra de Vidro</title>
+    </Helmet>
     <main className="min-h-screen bg-[#fafafa] pb-24 mt-20 selection:bg-amber-600 selection:text-white">
       
       {/* Banner Superior Premium */}
@@ -147,6 +152,7 @@ export function CadeirasEroticas() {
 
       </section>
     </main>
+    </>
   );
 }
 

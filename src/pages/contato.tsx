@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { Helmet } from 'react-helmet-async';
 
 interface SocialLink {
   href: string;
@@ -38,6 +39,10 @@ export default function Contato(): React.JSX.Element {
       }, [])
 
   return (
+    <>
+      <Helmet>
+        <title>FiberGlass Móveis | Contato</title>
+      </Helmet>
     <section
       id="contato"
       className="py-20 md:py-31 bg-zinc-50 border-t border-zinc-200/60 relative overflow-hidden"
@@ -209,5 +214,6 @@ export default function Contato(): React.JSX.Element {
         </div>
       </div>
     </section>
+    </>
   );
 }

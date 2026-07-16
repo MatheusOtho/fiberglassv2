@@ -13,6 +13,7 @@ import vaso10 from "../../../assets/categorias/paisagismo/vaso-modelo-domo.jpg";
 // import vaso7 from "../../../assets/categorias/paisagismo/vaso-modelo-canvas.jpg";
 import vaso8 from "../../../assets/categorias/paisagismo/vaso-modelo-quadrado.jpg";
 import vaso9 from "../../../assets/categorias/paisagismo/vasos-geometricos.jpg";
+import { Helmet } from 'react-helmet-async';
 
 import bannerPaisagismo from "../../../assets/categorias/paisagismo/bannerPaisagismo.jpg";
 
@@ -88,6 +89,10 @@ export function Paisagismo() {
   ];
 
   return (
+    <>
+      <Helmet>
+        <title>FiberGlass Móveis | Vasos e Paisagismo em Fibra de Vidro</title>
+      </Helmet>
     <main className="min-h-screen bg-[#fafafa] pb-24 mt-20 selection:bg-amber-600 selection:text-white">
       
       {/* Banner Superior Premium */}
@@ -195,6 +200,7 @@ export function Paisagismo() {
 
       </section>
     </main>
+    </>
   );
 }
 
