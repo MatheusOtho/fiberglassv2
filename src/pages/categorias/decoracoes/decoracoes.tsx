@@ -66,14 +66,14 @@ export function Decoracoes() {
       categoryLabel: "Design Natalino",
     },
     {
-      name: "Urso Natalino com Gorro",
-      slug: "/categoria-decoracoes/urso-natalino-com-gorro",
+      name: "Urso Natalino Sentado",
+      slug: "/categoria-decoracoes/urso-natalino-sentado",
       img: decoracao7,
       categoryLabel: "Design Natalino",
     },
     {
-      name: "Urso Natalino Modelo 3",
-      slug: "/categoria-decoracoes/urso-natalino-modelo-3",
+      name: "Urso Natalino com Gorro",
+      slug: "/categoria-decoracoes/urso-natalino-com-gorro",
       img: decoracao8,
       categoryLabel: "Design Natalino",
     },
