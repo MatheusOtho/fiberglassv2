@@ -28,7 +28,7 @@ export function Destaques() {
   const produtos: ProdutoDestaque[] = [
     {
       name: "Cadeira Erótica Spicy",
-      slug: "/categoria-cadeiras-eroticas/cadeira-erotica-spicy",
+      slug: "/categoria-cadeiras-eroticas/cadeira-erotica-modelo-spicy",
       category: "mobiliario",
       categoryLabel: "Mobiliário Exclusivo",
       img: destaque1,
