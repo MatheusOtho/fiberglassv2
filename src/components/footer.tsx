@@ -81,12 +81,6 @@ export function Footer() {
             </h4>
 
             <div className="space-y-3.5 mb-6">
-              <div className="flex items-center gap-3 text-zinc-400 text-sm group">
-                <i className="fa-solid fa-phone text-amber-500 w-4 text-center text-xs"></i>
-                <span className="group-hover:text-amber-500 transition-colors select-all cursor-pointer">
-                  (11) 94682-2225
-                </span>
-              </div>
               <div className="flex items-center gap-3 text-zinc-400 text-sm">
                 <i className="fa-solid fa-phone text-amber-500 w-4 text-center text-xs"></i>
                 <a

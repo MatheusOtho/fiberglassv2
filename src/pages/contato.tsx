@@ -149,7 +149,7 @@ export default function Contato(): React.JSX.Element {
 
             {/* CARD TELEFONE */}
             <motion.a
-              href="tel:11946822225"
+              href="tel:11999474730"
               className="flex items-center gap-4 p-5 bg-white border border-zinc-200 rounded-2xl shadow-sm group text-left transition-all"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -169,7 +169,7 @@ export default function Contato(): React.JSX.Element {
                   Ligue para nós
                 </span>
                 <span className="text-zinc-500 font-semibold text-xs mt-0.5 block">
-                  (11) 94682-2225
+                  (11) 99947-4730
                 </span>
               </div>
             </motion.a>
