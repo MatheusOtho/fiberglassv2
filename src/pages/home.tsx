@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-
+import Fibra from "./home/fibra"
 import Hero from "./home/hero"
 import Carrossel from "./home/carrossel"
 import Personalizados from "./home/personalizado"
@@ -21,6 +21,7 @@ function Home() {
         <main className="max-w-[1600px] m-auto">
           
             <Hero/>
+            <Fibra/>
             <Carrossel/>
             <Personalizados/>
             <Categorias/>
