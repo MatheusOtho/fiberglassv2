@@ -1,7 +1,26 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-cd    <!-- Google tag (gtag.js) -->
+    <!-- Event snippet for Contato conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-16853764879/PDvgCMLD-OkaEI-WwOQ-',
+      'value': 1.0,
+      'currency': 'BRL',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
+
+ <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16853764879"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
