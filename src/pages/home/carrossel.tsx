@@ -52,7 +52,6 @@ export function Carrossel() {
     setCurrentIndex((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
   };
 
-  // Auto-play configurado para 5 segundos (5000ms)
   useEffect(() => {
     const timer = setInterval(() => {
       handleNext();
@@ -61,10 +60,9 @@ export function Carrossel() {
     return () => clearInterval(timer);
   }, [currentIndex]);
 
-  // Variantes ajustadas para um efeito de transição sutil e cinematográfico
   const slideVariants = {
     enter: (dir: number) => ({
-      x: dir > 0 ? "30%" : "-30%",
+      x: dir > 0 ? "25%" : "-25%",
       opacity: 0,
     }),
     center: {
@@ -72,100 +70,135 @@ export function Carrossel() {
       opacity: 1,
     },
     exit: (dir: number) => ({
-      x: dir < 0 ? "30%" : "-30%",
+      x: dir < 0 ? "25%" : "-25%",
       opacity: 0,
     }),
   };
 
   return (
-    <section className="relative w-full max-w-7xl mx-auto px-4 py-16 selection:bg-zinc-900 selection:text-white">
+    <section className="h-screen min-h-[600px] max-h-[1080px] w-full bg-[#f8f9fa] text-zinc-900 relative selection:bg-amber-600 selection:text-white flex flex-col justify-between py-8 md:py-12">
       
-      <div className="mb-10 text-center">
-        <span className="text-amber-600 text-xs font-bold uppercase tracking-[0.2em] block mb-2">Galeria de Projetos</span>
-        <h2 className="text-3xl md:text-4xl font-black text-zinc-950 tracking-tight">Portfólio de nossas obras</h2>
-      </div>
-
-      <div className="relative h-[400px] md:h-[550px] w-full rounded-3xl overflow-hidden bg-zinc-50 border border-zinc-100 shadow-[0_20px_50px_rgba(0,0,0,0.04)]">
+      <div className="container mx-auto px-4 max-w-6xl h-full flex flex-col justify-between">
         
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-            key={currentIndex}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            // Transição linear baseada em tempo (tween) e com leve desaceleração (easeOut)
-            transition={{ 
-              x: { type: "tween", duration: 0.8, ease: "easeOut" },
-              opacity: { duration: 0.6 }
-            }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.4}
-            // Tratamento do drag simplificado com inferência automática de tipos pelo TS
-            onDragEnd={(_, info) => {
-              const swipeThreshold = 50;
-              if (info.offset.x < -swipeThreshold) {
-                handleNext();
-              } else if (info.offset.x > swipeThreshold) {
-                handlePrev();
-              }
-            }}
-            className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing flex flex-col justify-between"
+        {/* ================= HEADER ================= */}
+        <div className="text-center space-y-2 shrink-0">
+          <motion.span
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3.5 py-1 bg-white border border-zinc-200 text-amber-700 text-[10px] font-bold tracking-widest uppercase rounded-md shadow-xs"
           >
-            <div className="w-full h-full relative">
-              <img
-                src={SLIDES[currentIndex].img}
-                alt={SLIDES[currentIndex].title}
-                className="w-full h-full object-cover select-none pointer-events-none"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-            </div>
+            <i className="fa-solid fa-images text-[9px] text-amber-600"></i>
+            <span>Galeria de Projetos</span>
+          </motion.span>
 
-            <div className="absolute bottom-6 left-6 md:left-10 right-6 md:right-10 flex justify-between items-end text-white z-10 pointer-events-none">
-              <div className="flex flex-col">
-                <span className="text-[10px] uppercase font-bold tracking-widest text-amber-400 mb-1">Peça Exclusiva</span>
-                <h3 className="text-xl md:text-2xl font-black tracking-tight">{SLIDES[currentIndex].title}</h3>
+          <motion.h2
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-950 tracking-tight"
+          >
+            Portfólio de{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-800 via-amber-700 to-amber-600">
+              Nossas Obras
+            </span>
+          </motion.h2>
+        </div>
+
+        {/* ================= FRAME PRINCIPAL DO SLIDER ================= */}
+        <div className="relative flex-1 min-h-[280px] my-4 rounded-2xl sm:rounded-3xl overflow-hidden bg-zinc-200 border border-zinc-200/90 shadow-xl">
+          
+          <AnimatePresence initial={false} custom={direction} mode="popLayout">
+            <motion.div
+              key={currentIndex}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                x: { type: "spring", stiffness: 300, damping: 30 },
+                opacity: { duration: 0.3 },
+              }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(_, info) => {
+                const swipeThreshold = 50;
+                if (info.offset.x < -swipeThreshold) {
+                  handleNext();
+                } else if (info.offset.x > swipeThreshold) {
+                  handlePrev();
+                }
+              }}
+              className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing"
+            >
+              <div className="w-full h-full relative">
+                <img
+                  src={SLIDES[currentIndex].img}
+                  alt={SLIDES[currentIndex].title}
+                  className="w-full h-full object-cover select-none pointer-events-none"
+                />
+                {/* Gradiente para leitura legível dos textos */}
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent pointer-events-none" />
               </div>
-              <span className="text-xs font-mono opacity-80 shrink-0">
-                {(currentIndex + 1).toString().padStart(2, "0")} / {SLIDES.length.toString().padStart(2, "0")}
-              </span>
-            </div>
-          </motion.div>
-        </AnimatePresence>
 
-        <button
-          onClick={handlePrev}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 hidden sm:flex w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-zinc-200/50 items-center justify-center text-zinc-900 hover:bg-white shadow-md transition-all duration-200 active:scale-95"
-          aria-label="Slide anterior"
-        >
-          <i className="fa-solid fa-chevron-left text-sm"></i>
-        </button>
+              {/* Informações Flutuantes no Slide */}
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex justify-between items-end text-white z-10 pointer-events-none">
+                <div className="bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/60 shadow-md text-zinc-950">
+                  <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-amber-700 block">
+                    Peça Sob Medida
+                  </span>
+                  <h3 className="text-xs sm:text-sm font-bold tracking-tight mt-0.5">
+                    {SLIDES[currentIndex].title}
+                  </h3>
+                </div>
 
-        <button
-          onClick={handleNext}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 hidden sm:flex w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-zinc-200/50 items-center justify-center text-zinc-900 hover:bg-white shadow-md transition-all duration-200 active:scale-95"
-          aria-label="Próximo slide"
-        >
-          <i className="fa-solid fa-chevron-right text-sm"></i>
-        </button>
-      </div>
+                <div className="bg-zinc-950/80 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-white/10 text-xs font-mono text-white/90 shadow-sm">
+                  {(currentIndex + 1).toString().padStart(2, "0")} /{" "}
+                  {SLIDES.length.toString().padStart(2, "0")}
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
 
-      <div className="flex justify-center items-center gap-1.5 mt-6 overflow-x-auto py-2 px-4 max-w-full scrollbar-none">
-        {SLIDES.map((slide, index) => (
+          {/* Navegação Flutuante Lateral */}
           <button
-            key={slide.id}
-            onClick={() => {
-              setDirection(index > currentIndex ? 1 : -1);
-              setCurrentIndex(index);
-            }}
-            className={`h-1.5 rounded-full transition-all duration-300 shrink-0 ${
-              index === currentIndex ? "w-8 bg-zinc-950" : "w-2 bg-zinc-200 hover:bg-zinc-300"
-            }`}
-            aria-label={`Ir para slide ${index + 1}`}
-          />
-        ))}
+            onClick={handlePrev}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 hidden sm:flex w-10 h-10 rounded-full bg-white/90 backdrop-blur-md border border-zinc-200/80 items-center justify-center text-zinc-800 hover:bg-white hover:scale-105 shadow-md transition-all duration-200 active:scale-95"
+            aria-label="Slide anterior"
+          >
+            <i className="fa-solid fa-chevron-left text-xs"></i>
+          </button>
+
+          <button
+            onClick={handleNext}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 hidden sm:flex w-10 h-10 rounded-full bg-white/90 backdrop-blur-md border border-zinc-200/80 items-center justify-center text-zinc-800 hover:bg-white hover:scale-105 shadow-md transition-all duration-200 active:scale-95"
+            aria-label="Próximo slide"
+          >
+            <i className="fa-solid fa-chevron-right text-xs"></i>
+          </button>
+        </div>
+
+        {/* ================= INDICADORES DE PAGINAÇÃO ================= */}
+        <div className="flex justify-center items-center gap-1.5 overflow-x-auto py-1 px-4 max-w-full shrink-0 scrollbar-none">
+          {SLIDES.map((slide, index) => (
+            <button
+              key={slide.id}
+              onClick={() => {
+                setDirection(index > currentIndex ? 1 : -1);
+                setCurrentIndex(index);
+              }}
+              className={`h-1.5 rounded-full transition-all duration-300 shrink-0 ${
+                index === currentIndex
+                  ? "w-8 bg-amber-600"
+                  : "w-2 bg-zinc-300 hover:bg-zinc-400"
+              }`}
+              aria-label={`Ir para slide ${index + 1}`}
+            />
+          ))}
+        </div>
+
       </div>
     </section>
   );

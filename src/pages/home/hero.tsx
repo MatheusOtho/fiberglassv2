@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-// Suas importações de imagens com os caminhos corretos
-import heroImg1 from "../../assets/home/hero/decoracao-bolas-natalinas.png"; 
-import heroImg2 from "../../assets/home/hero/poltrona-modelo-stone.png";  
+// Importação das imagens
+import bannerFundo from "../../assets/home/hero/moveis-personalizados.png";
+import imgLateral from "../../assets/home/hero/poltrona-modelo-stone.png";
 
 interface CounterProps {
   end: number;
@@ -41,148 +41,133 @@ const Counter: React.FC<CounterProps> = ({ end, suffix = "", duration = 2000 }) 
 
 function Hero() {
   return (
-    // h-screen garante que tudo fica cravado no campo de visão inicial do usuário
-    <section className="relative h-screen min-h-[650px] lg:min-h-[750px] flex items-center justify-center pt-35 md:pt-20 bg-white overflow-hidden selection:bg-zinc-900 selection:text-white">
+    <section className="relative h-screen min-h-[600px] flex flex-col justify-center px-4 sm:px-8 md:px-12 lg:px-16 pt-24 sm:pt-28 pb-6 sm:pb-10 bg-zinc-950 overflow-hidden selection:bg-amber-500 selection:text-zinc-950">
       
-      {/* IMAGEM DA ESQUERDA - Poltrona Modelo Stone (Sem efeito de hover) */}
-      <motion.div
-        className="absolute left-4 xl:left-12 top-1/2 -translate-y-1/2 z-0 hidden xl:block select-none"
-        initial={{ opacity: 0, x: -100, rotate: -6 }}
-        animate={{ opacity: 1, x: 0, rotate: -3 }}
-        transition={{
-          duration: 1.4,
-          type: "spring",
-          stiffness: 60,
-          damping: 20,
-        }}
-      >
-        <div className="relative p-6 bg-zinc-50/50 backdrop-blur-md rounded-3xl border border-zinc-100 shadow-[0_30px_70px_rgba(0,0,0,0.06)]">
-          <img
-            src={heroImg2}
-            alt="Poltrona Modelo Stone"
-            className="w-[260px] xl:w-[290px] h-auto object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.05)] brightness-[1.01]"
-          />
-          <span className="absolute bottom-4 left-6 text-[10px] font-bold text-zinc-400 tracking-wider uppercase">Poltrona Stone</span>
-        </div>
-      </motion.div>
+      {/* ================= BACKGROUND DARK ================= */}
+      <div className="absolute inset-0 z-0 select-none">
+        <motion.img
+          src={bannerFundo}
+          alt="Móveis Personalizados em Fibra de Vidro"
+          className="w-full h-full object-cover object-center opacity-30 sm:opacity-40 lg:opacity-50"
+          initial={{ scale: 1.05 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.8, ease: "easeOut" }}
+        />
 
-      {/* IMAGEM DA DIREITA - Decoração Bolas Natalinas (Sem efeito de hover) */}
-      <motion.div
-        className="absolute right-4 xl:right-12 top-1/2 -translate-y-1/2 z-0 hidden xl:block select-none"
-        initial={{ opacity: 0, x: 100, rotate: 6 }}
-        animate={{ opacity: 1, x: 0, rotate: 3 }}
-        transition={{
-          duration: 1.4,
-          delay: 0.1,
-          type: "spring",
-          stiffness: 60,
-          damping: 20,
-        }}
-      >
-        <div className="relative p-6 bg-zinc-50/50 backdrop-blur-md rounded-3xl border border-zinc-100 shadow-[0_30px_70px_rgba(0,0,0,0.06)]">
-          <img
-            src={heroImg1}
-            alt="Decoração Bolas Natalinas"
-            className="w-[200px] xl:w-[230px] h-auto object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.05)] brightness-[1.01]"
-          />
-          <span className="absolute bottom-4 right-6 text-[10px] font-bold text-zinc-400 tracking-wider uppercase">Bolas Natalinas</span>
-        </div>
-      </motion.div>
-
-      {/* Iluminação de Estúdio Sutil de Fundo */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-zinc-100/60 rounded-full blur-[130px]" />
-        <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-[500px] h-[350px] bg-amber-500/[0.03] rounded-full blur-[100px]" />
+        {/* Gradientes responsivos escuros */}
+        <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-zinc-950 via-zinc-950/80 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-zinc-950 via-zinc-950/90 to-transparent" />
       </div>
 
-      {/* CONTEÚDO CENTRAL */}
-      <div className="container mx-auto px-4 relative z-10 w-full max-w-4xl">
-        <div className="text-center flex flex-col items-center">
-          
-          <motion.p
-            className="text-amber-600 font-bold uppercase tracking-[0.2em] text-xs mb-4"
-            initial={{ opacity: 0, y: 10 }}
+      {/* ================= IMAGEM DE DESTAQUE LATERAL (APENAS DESKTOP ≥ 1280px) ================= */}
+      <motion.div
+        initial={{ opacity: 0, x: 50, scale: 0.95 }}
+        animate={{ opacity: 1, x: 0, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+        className="hidden xl:block absolute right-8 xl:right-16 top-1/2 -translate-y-1/2 z-20 max-w-[400px] xl:max-w-[460px] pointer-events-none select-none"
+      >
+        <motion.img
+          src={imgLateral}
+          alt="Poltrona Modelo Stone"
+          className="w-full h-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)]"
+        />
+      </motion.div>
+
+      {/* ================= CONTAINER CENTRALIZADO DA HERO ================= */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col justify-center gap-6 sm:gap-10 my-auto">
+        
+        {/* TOPO: BADGE E TÍTULO PRINCIPAL */}
+        <div className="max-w-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
+            className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3"
           >
-            FiberGlass <span className="text-zinc-900 font-medium">Móveis</span>
-          </motion.p>
+            <span className="h-[2px] w-5 sm:w-8 bg-amber-500" />
+            <span className="text-amber-400 font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[10px] sm:text-xs">
+              FiberGlass Móveis
+            </span>
+          </motion.div>
 
           <motion.h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-black text-zinc-950 mb-6 leading-[1.15] tracking-tight max-w-2xl"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-light text-white tracking-tight leading-[1.12] drop-shadow-lg"
           >
-            Transforme seu espaço com{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-amber-600 to-amber-500 block sm:inline">
-              elegância e durabilidade.
+            Transforme seu ambiente com <br className="hidden sm:inline" />
+            <span className="font-extrabold text-amber-400 italic font-serif block sm:inline mt-1 sm:mt-0">
+              elegância & durabilidade
             </span>
           </motion.h1>
+        </div>
 
-          <motion.p
-            className="text-base sm:text-lg text-zinc-600 mb-10 max-w-2xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 15 }}
+        {/* BASE: PARÁGRAFO, CONTADORES E BOTÃO */}
+        <div className="w-full flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6">
+          
+          {/* Bloco de Texto e Contadores (Sem Fundo) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
+            className="max-w-xl w-full"
           >
-            Criamos bancos, mesas, poltronas, decorações e vasos personalizados para paisagismo. Qualidade comprovada para transformar{" "}
-            <span className="font-semibold text-zinc-900">
-              jardins, playgrounds, áreas externas e internas, condomínios, casas e shoppings.
-            </span>
-          </motion.p>
+            <p className="text-zinc-200 text-xs sm:text-base lg:text-lg leading-relaxed font-normal drop-shadow">
+              Bancos, mesas, poltronas, cadeiras, decorações e vasos sob medida. Sofisticação e alta durabilidade para ambientes internos, externos, shoppings, condomínios e paisagismo.
+            </p>
+            
+            {/* Contadores */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-6 mt-4 pt-4 border-t border-white/20 text-center sm:text-left">
+              <div>
+                <span className="text-lg sm:text-2xl lg:text-3xl font-bold text-amber-400 block">
+                  <Counter end={150} suffix="+" />
+                </span>
+                <span className="text-[10px] sm:text-xs lg:text-base text-zinc-300 uppercase tracking-wider block font-medium">
+                  Projetos
+                </span>
+              </div>
 
-          {/* GRID DE CONTADORES */}
-          <motion.div
-            className="grid grid-cols-3 w-full max-w-2xl mx-auto gap-4 md:gap-8 mb-7 border-y border-zinc-100 py-5"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <div className="text-center">
-              <span className="block text-2xl md:text-3xl font-extrabold text-amber-600 tracking-tight">
-                <Counter end={150} suffix="+" />
-              </span>
-              <span className="text-zinc-400 text-[11px] font-medium mt-1 block">
-                Projetos Entregues
-              </span>
-            </div>
+              <div className="border-x border-white/20 px-1 sm:border-x-0 sm:px-0">
+                <span className="text-lg sm:text-2xl lg:text-3xl font-bold text-amber-400 block">
+                  <Counter end={10} suffix="+" />
+                </span>
+                <span className="text-[10px] sm:text-xs lg:text-base text-zinc-300 uppercase tracking-wider block font-medium">
+                  Anos Exp.
+                </span>
+              </div>
 
-            <div className="text-center border-x border-zinc-100">
-              <span className="block text-2xl md:text-3xl font-extrabold text-amber-600 tracking-tight">
-                <Counter end={10} suffix="+" />
-              </span>
-              <span className="text-zinc-400 text-[11px] font-medium mt-1 block">
-                Anos no Mercado
-              </span>
-            </div>
-
-            <div className="text-center">
-              <span className="block text-2xl md:text-3xl font-extrabold text-amber-600 tracking-tight">
-                <Counter end={110} suffix="+" />
-              </span>
-              <span className="text-zinc-400 text-[11px] font-medium mt-1 block">
-                Clientes Satisfeitos
-              </span>
+              <div>
+                <span className="text-lg sm:text-2xl lg:text-3xl font-bold text-amber-400 block">
+                  <Counter end={110} suffix="+" />
+                </span>
+                <span className="text-[10px] sm:text-xs lg:text-base text-zinc-300 uppercase tracking-wider block font-medium">
+                  Clientes
+                </span>
+              </div>
             </div>
           </motion.div>
 
-          {/* BOTÃO DE CONVERSÃO */}
-          <motion.a
-            href="https://wa.me/5511999474730?text=Olá! Gostaria de conversar sobre um projeto."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-zinc-950 hover:bg-zinc-900 active:scale-[0.99] text-white px-8 py-4 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 shadow-xl shadow-zinc-950/10"
-            initial={{ opacity: 0, scale: 0.95 }}
+          {/* Botão Responsivo Padronizado */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="w-full lg:w-auto"
           >
-            <i className="fa-brands fa-whatsapp text-emerald-400 text-base"></i>
-            <span>Falar com consultor</span>
-          </motion.a>
+            <a
+              href="https://wa.me/5511999474730?text=Olá! Gostaria de conversar sobre um projeto."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto bg-white/10 hover:bg-white/20 active:bg-white/30 backdrop-blur-md border border-white/30 text-white font-semibold px-6 sm:px-8 py-3.5 sm:py-4 rounded-full transition-all duration-300 shadow-2xl hover:scale-105 active:scale-95 group text-sm sm:text-base tracking-wide"
+            >
+              <i className="fa-brands fa-whatsapp text-emerald-400 text-lg sm:text-xl transition-transform group-hover:rotate-12"></i>
+              <span>Fale com Vendedor</span>
+            </a>
+          </motion.div>
 
         </div>
+
       </div>
 
     </section>

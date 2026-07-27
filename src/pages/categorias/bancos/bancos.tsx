@@ -5,7 +5,6 @@ import { Helmet } from 'react-helmet-async';
 
 import banco1 from "../../../assets/categorias/bancos/banco-safira.jpeg";
 import banco2 from "../../../assets/categorias/bancos/banco-tablet.jpeg";
-
 import bannerBancos from "../../../assets/categorias/bancos/bannerBancos.jpg";
 
 interface ItemBancos {
@@ -16,12 +15,10 @@ interface ItemBancos {
 }
 
 export function Bancos() {
-  // Garante que o usuário entre no topo da página
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Lista estruturada com o mesmo padrão de objeto do Destaques.tsx
   const itensBancos: ItemBancos[] = [
     {
       name: "Banco Safira",
@@ -42,113 +39,153 @@ export function Bancos() {
       <Helmet>
         <title>FiberGlass Móveis | Bancos em Fibra de Vidro</title>
       </Helmet>
-    <main className="min-h-screen bg-[#fafafa] pb-24 mt-20 selection:bg-amber-600 selection:text-white">
       
-      {/* Banner Superior Premium */}
-      <section className="relative h-[45vh] sm:h-[55vh] w-full overflow-hidden bg-zinc-950 select-none">
-        <div className="absolute inset-0 w-full h-full">
-          <img
-            src={bannerBancos}
-            alt="Banner Coleção Bancos de Alto Padrão"
-            className="w-full h-full object-cover opacity-60 brightness-90 transform scale-100"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#fafafa] via-zinc-950/40 to-transparent" />
-        </div>
-
-        {/* Texto Centralizado do Banner */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 relative z-10 pt-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-3"
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/20 text-white text-[11px] font-bold tracking-wider uppercase rounded-md backdrop-blur-sm">
-              <span>Mobiliário de Alta Fibra</span>
-            </div>
-            <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-none uppercase">
-              Bancos
-            </h1>
-            <p className="text-zinc-300 text-xs sm:text-sm max-w-md mx-auto font-normal leading-relaxed">
-              Ergonomia, sofisticação e elegância, bancos ideias para transformar o seu espaço.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Conteúdo Principal: Grid de Produtos Idêntico ao Destaques.tsx */}
-      <section className="container mx-auto px-4 lg:px-8 max-w-6xl mt-16 relative z-20">
+      <main className="min-h-screen bg-white text-zinc-950 pb-32 relative overflow-hidden selection:bg-amber-500 selection:text-white">
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-          {itensBancos.map((bancos, idx) => (
+        {/* Banner Superior Executivo com Transição SVG Orgânica */}
+        <section className="relative h-[48vh] sm:h-[58vh] w-full overflow-hidden bg-zinc-950 select-none flex items-center justify-center">
+          <div className="absolute inset-0 w-full h-full">
+            <img
+              src={bannerBancos}
+              alt="Banner Coleção Bancos de Alto Padrão"
+              className="w-full h-full object-cover opacity-50 brightness-90 transform scale-100"
+            />
+            {/* Gradientes e Camadas de Profundidade */}
+            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/40 via-transparent to-transparent" />
+          </div>
+
+          {/* Elementos SVG Decorativos de Fundo no Banner */}
+          <div className="absolute inset-0 pointer-events-none opacity-30">
+            <svg className="absolute w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="none" fill="none">
+              <path d="M-100 100C400 300 700 50 1100 250C1350 380 1500 150 1600 200V900H-100V100Z" fill="url(#banner_gradient)" />
+              <defs>
+                <linearGradient id="banner_gradient" x1="725" y1="100" x2="725" y2="900" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#f59e0b" stopOpacity="0.25" />
+                  <stop offset="1" stopColor="#09090b" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          {/* Conteúdo Centralizado do Banner */}
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10 text-center pt-10">
             <motion.div
-              key={bancos.slug}
-              initial={{ opacity: 0, scale: 0.95, y: 15 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
-              className="group flex flex-col"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-4"
             >
-              {/* Imagem do Card - Proporção de Destaques [4/5] */}
-              <Link
-                to={bancos.slug}
-                className="relative aspect-[4/5] rounded-2xl overflow-hidden block bg-zinc-100 border border-zinc-200/50 shadow-sm"
-                aria-label={`Ver detalhes de ${bancos.name}`}
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/20 text-amber-400 text-[11px] font-black tracking-widest uppercase rounded-full backdrop-blur-md shadow-lg">
+                <svg className="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                <span>Mobiliário de Alta Fibra</span>
+              </div>
+
+              <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight uppercase">
+                Bancos
+              </h1>
+
+              <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full mx-auto" />
+
+              <p className="text-zinc-300 text-sm sm:text-base max-w-lg mx-auto font-normal leading-relaxed">
+                Ergonomia, sofisticação e elegância. Bancos ideais para transformar e valorizar o seu espaço corporativo ou residencial.
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Divisor SVG Curvo Integrando o Banner com o Corpo da Página */}
+          <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none">
+            <svg className="relative block w-full h-10 sm:h-16" viewBox="0 0 1200 120" preserveAspectRatio="none">
+              <path d="M0,0 C150,90 350,-40 500,60 C650,160 900,10 1200,40 L1200,120 L0,120 Z" fill="#ffffff"></path>
+            </svg>
+          </div>
+        </section>
+
+        {/* Fundo Decorativo Discreto no Corpo */}
+        <div className="absolute top-1/2 left-0 w-80 h-80 bg-amber-500/5 rounded-full blur-[160px] pointer-events-none" />
+
+        {/* Conteúdo Principal: Grid de Produtos */}
+        <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl mt-12 sm:mt-16 relative z-20">
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+            {itensBancos.map((bancos, idx) => (
+              <motion.div
+                key={bancos.slug}
+                initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                className="group flex flex-col bg-transparent"
               >
-                <img
-                  src={bancos.img}
-                  alt={bancos.name}
-                  className="w-full h-full object-cover transform scale-100 group-hover:scale-[1.03] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                  loading="lazy"
-                />
-                
-                {/* Gradiente de sombra interno para o hover */}
-                <div className="absolute inset-0 bg-black/[0.02] group-hover:bg-black/[0.05] transition-colors duration-300 mix-blend-multiply" />
-
-                {/* Seta e Efeito de Desfoque que surge no Hover */}
-                <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-400">
-                  <div className="w-12 h-12 rounded-full bg-white text-zinc-950 flex items-center justify-center shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-400">
-                    <i className="fa-solid fa-eye text-xs"></i>
-                  </div>
-                </div>
-              </Link>
-
-              {/* Metadados / Detalhes do Produto (Alinhado estritamente à esquerda) */}
-              <div className="pt-4 px-1 space-y-1.5 text-left flex flex-col items-start">
-                <span className="text-[10px] font-bold text-amber-600 uppercase tracking-wider">
-                  {bancos.categoryLabel}
-                </span>
-                
-                <Link 
-                  to={bancos.slug}
-                  className="block group-hover:text-amber-600 transition-colors duration-200"
-                >
-                  <h3 className="text-base font-black text-zinc-950 tracking-tight leading-tight">
-                    {bancos.name}
-                  </h3>
-                </Link>
-
+                {/* Imagem do Card - Proporção [4/5] */}
                 <Link
                   to={bancos.slug}
-                  className="inline-flex items-center gap-1.5 text-zinc-500 hover:text-zinc-950 text-xs font-bold transition-colors duration-200 pt-0.5"
+                  className="relative aspect-[4/5] rounded-3xl overflow-hidden block bg-zinc-100 border border-zinc-200/80 shadow-sm group-hover:shadow-xl group-hover:border-amber-400/60 transition-all duration-500"
+                  aria-label={`Ver detalhes de ${bancos.name}`}
                 >
-                  <span>Especificações</span>
-                  <i className="fa-solid fa-chevron-right text-[8px] transform group-hover:translate-x-0.5 transition-transform"></i>
+                  <img
+                    src={bancos.img}
+                    alt={bancos.name}
+                    className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    loading="lazy"
+                  />
+                  
+                  {/* Gradiente sutil overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity" />
+
+                  {/* Botão de Visualização com Ícone SVG no Hover */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/30 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-400">
+                    <div className="w-12 h-12 rounded-2xl bg-white text-zinc-950 flex items-center justify-center shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-400">
+                      <svg className="w-5 h-5 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    </div>
+                  </div>
                 </Link>
+
+                {/* Metadados / Detalhes do Produto */}
+                <div className="pt-4 px-2 pb-2 space-y-2 text-left flex flex-col items-start">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 border border-amber-200/60 text-amber-700 text-[10px] font-black uppercase tracking-widest rounded-md">
+                    <svg className="w-3 h-3 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                    <span>{bancos.categoryLabel}</span>
+                  </div>
+                  
+                  <Link 
+                    to={bancos.slug}
+                    className="block group-hover:text-amber-600 transition-colors duration-200"
+                  >
+                    <h3 className="text-base font-black text-zinc-950 tracking-tight leading-tight">
+                      {bancos.name}
+                    </h3>
+                  </Link>
+
+                  <Link
+                    to={bancos.slug}
+                    className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-amber-600 text-xs font-bold transition-colors duration-200 pt-1"
+                  >
+                    <span>Especificações Técnicas</span>
+                    <svg className="w-3 h-3 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Rodapé Executivo / Chamada Final com Detalhes SVG */}
+          <div className="mt-28 p-8 sm:p-12 rounded-3xl bg-zinc-50 border border-zinc-200/80 shadow-sm text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 -mt-12 -mr-12 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+            
+            <div className="relative z-10 space-y-3 max-w-xl mx-auto">
+              <div className="w-10 h-10 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center mx-auto shadow-sm">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
               </div>
-            </motion.div>
-          ))}
-        </div>
+              <h4 className="text-lg font-black text-zinc-950 uppercase tracking-tight">Precisa de um Projeto Personalizado?</h4>
+              <p className="text-xs sm:text-sm text-zinc-500 font-medium leading-relaxed">
+                Atendemos projetos corporativos, residenciais, comerciais e áreas de grande fluxo. Entre em contato conosco para conversar sobre suas demandas sob medida.
+              </p>
+            </div>
+          </div>
 
-        {/* Linha de rodapé decorativa */}
-        <div className="mt-24 text-center border-t border-zinc-200/60 pt-10">
-          <p className="text-xs text-zinc-400 font-medium">
-            Projetos corporativos, residenciais, comerciais e dentre outros? Entre em contato conosco sobre.
-          </p>
-        </div>
-
-      </section>
-    </main>
+        </section>
+      </main>
     </>
   );
 }

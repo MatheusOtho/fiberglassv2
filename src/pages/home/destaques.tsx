@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -91,7 +91,7 @@ export function Destaques() {
     },
   ];
 
-  // Filtros de navegação rápidos
+  // Filtros de navegação rápidos originais
   const filtros = [
     { id: "todos", label: "Todos" },
     { id: "mobiliario", label: "Mobiliário" },
@@ -106,9 +106,9 @@ export function Destaques() {
 
   return (
     <section id="destaques" className="py-24 md:py-32 bg-[#fafafa] border-t border-zinc-100">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 max-w-7xl">
         
-        {/* Header da Seção */}
+        {/* Header da Seção (Original) */}
         <div className="flex flex-col items-center justify-center mb-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -132,7 +132,7 @@ export function Destaques() {
           </motion.div>
         </div>
 
-        {/* Filtros de Categoria Estilo Minimalista */}
+        {/* Filtros de Categoria Estilo Minimalista (Original) */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
           {filtros.map((filtro) => (
             <button
@@ -156,7 +156,7 @@ export function Destaques() {
           ))}
         </div>
 
-        {/* Grid de Produtos */}
+        {/* Grid de Produtos (Layout Original Restaurado) */}
         <motion.div 
           layout
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"
@@ -172,7 +172,7 @@ export function Destaques() {
                 transition={{ duration: 0.3 }}
                 className="group flex flex-col"
               >
-                {/* Imagem do Card */}
+                {/* Imagem do Card (Proporção Original 4/5) */}
                 <Link
                   to={prod.slug}
                   className="relative aspect-[4/5] rounded-2xl overflow-hidden block bg-zinc-100 border border-zinc-200/50 shadow-sm"
@@ -196,7 +196,7 @@ export function Destaques() {
                   </div>
                 </Link>
 
-                {/* Metadados / Detalhes do Produto (Alinhado à esquerda) */}
+                {/* Metadados / Detalhes do Produto (Alinhado à esquerda - Original) */}
                 <div className="pt-4 px-1 space-y-1.5 text-left flex flex-col items-start">
                   <span className="text-[10px] font-bold text-amber-600 uppercase tracking-wider">
                     {prod.categoryLabel}

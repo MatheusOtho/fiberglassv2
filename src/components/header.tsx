@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import logoHeader from "../assets/logo-da-fiberglass-header.png";
@@ -19,9 +19,10 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [isMobileCategoriesOpen, setIsMobileCategoriesOpen] = useState<boolean>(false);
-  
+
   const location = useLocation();
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleMenu = (): void => setIsMenuOpen((prev) => !prev);
   const closeMenu = (): void => {
@@ -40,6 +41,30 @@ function Header() {
     }, 180);
   };
 
+  // Fecha o dropdown ao pressionar ESC ou clicar fora dele
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsDropdownOpen(false);
+        setIsMenuOpen(false);
+      }
+    };
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const mainLinks: NavLinkItem[] = [
     { label: "Início", path: "/" },
     { label: "Contato", path: "/contato" },
@@ -57,7 +82,7 @@ function Header() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-100 z-50 transition-all duration-300">
+    <header className="fixed top-0 left-0 w-full bg-gray/80 backdrop-blur-md z-50 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 md:h-20 flex items-center justify-between">
         
         {/* Logo */}
@@ -70,19 +95,21 @@ function Header() {
           <Link
             to="/"
             className={`group relative px-4 py-2 text-sm font-medium transition-colors duration-200 ${
-              location.pathname === "/" ? "text-gray-900" : "text-gray-600 hover:text-gray-900"
+              location.pathname === "/" ? "text-amber-500" : "text-yellow-600 hover:text-amber-500"
             }`}
           >
             Início
-            <span className={`absolute bottom-0 left-4 right-4 h-0.5 bg-amber-500 transition-transform duration-300 origin-left ${location.pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`} />
+            <span className={`absolute bottom-0 left-4 right-4 h-0.5 bg-amber-400 transition-transform duration-300 origin-left ${location.pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`} />
           </Link>
 
           {/* MEGA DROPDOWN CATEGORIAS */}
-          <div className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+          <div className="relative" ref={dropdownRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className={`group flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors duration-200 ${
-                isDropdownOpen || categoryLinks.some(link => location.pathname === link.path) ? "text-gray-900" : "text-gray-600 hover:text-gray-900"
+                isDropdownOpen || categoryLinks.some((link) => location.pathname === link.path)
+                  ? "text-amber-500"
+                  : "text-yellow-600 hover:text-amber-600"
               }`}
             >
               <span>Categorias</span>
@@ -106,14 +133,18 @@ function Header() {
                         to={category.path}
                         onClick={() => setIsDropdownOpen(false)}
                         className={`group/item flex gap-3 p-3 rounded-xl transition-all duration-200 text-left ${
-                          isCatActive 
-                            ? "bg-amber-50/70 text-amber-900" 
+                          isCatActive
+                            ? "bg-amber-50/70 text-amber-900"
                             : "hover:bg-gray-50 text-gray-700 hover:text-gray-900"
                         }`}
                       >
-                        <div className={`flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${
-                          isCatActive ? "bg-amber-500 text-white" : "bg-gray-100 text-gray-500 group-hover/item:bg-amber-50 group-hover/item:text-amber-500"
-                        }`}>
+                        <div
+                          className={`flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${
+                            isCatActive
+                              ? "bg-amber-500 text-white"
+                              : "bg-gray-100 text-gray-500 group-hover/item:bg-amber-50 group-hover/item:text-amber-500"
+                          }`}
+                        >
                           <i className={`fa-solid ${category.icon} text-sm`}></i>
                         </div>
                         <div className="flex flex-col gap-0.5">
@@ -138,15 +169,19 @@ function Header() {
                 key={link.path}
                 to={link.path}
                 className={`group relative px-4 py-2 text-sm font-medium transition-colors duration-200 ${
-                  isActive ? "text-gray-900" : "text-gray-600 hover:text-gray-900"
+                  isActive ? "text-amber-500" : "text-yellow-600 hover:text-amber-600"
                 }`}
               >
                 {link.label}
-                <span className={`absolute bottom-0 left-4 right-4 h-0.5 bg-amber-500 transition-transform duration-300 origin-left ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`} />
+                <span
+                  className={`absolute bottom-0 left-4 right-4 h-0.5 bg-amber-500 transition-transform duration-300 origin-left ${
+                    isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                />
               </Link>
             );
           })}
-          
+
           <a
             href="https://wa.me/5511980129528"
             target="_blank"
@@ -162,15 +197,15 @@ function Header() {
         <div className="flex lg:hidden items-center">
           <button
             onClick={toggleMenu}
-            className="p-2 text-gray-600 hover:text-gray-900 focus:outline-none"
+            className="p-2 text-amber-500 hover:text-amber-300 focus:outline-none"
             aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
           >
-            <i className={`fa-solid text-xl transition-transform duration-200 ${isMenuOpen ? "fa-times rotate-90" : "fa-bars"}`}></i>
+            <i className={`fa-solid text-xl md:text-3xl transition-transform duration-200 ${isMenuOpen ? "fa-times rotate-90" : "fa-bars"}`}></i>
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu (Drawer CORRIGIDO COM DYNAMIC HEIGHT) */}
+      {/* Mobile Menu Drawer */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -183,12 +218,12 @@ function Header() {
             {/* Mobile Header - Fixo no Topo */}
             <div className="px-4 py-4 border-b border-gray-100 flex items-center justify-between bg-white flex-shrink-0">
               <span className="font-bold text-gray-900 tracking-tight">Menu</span>
-              <button onClick={closeMenu} className="p-2 text-gray-400 hover:text-gray-600">
+              <button onClick={closeMenu} className="p-2 text-gray-400 hover:text-gray-600" aria-label="Fechar menu">
                 <i className="fa-solid fa-times text-xl"></i>
               </button>
             </div>
 
-            {/* Mobile Body - Única parte que rola se o conteúdo for grande */}
+            {/* Mobile Body */}
             <div className="flex-1 overflow-y-auto px-4 py-6 flex flex-col gap-1.5 subpixel-antialiased">
               <Link
                 to="/"
@@ -210,9 +245,13 @@ function Header() {
                   }`}
                 >
                   <span>Categorias</span>
-                  <i className={`fa-solid fa-chevron-down text-xs text-gray-400 transition-transform duration-200 ${isMobileCategoriesOpen ? "rotate-180" : ""}`}></i>
+                  <i
+                    className={`fa-solid fa-chevron-down text-xs text-gray-400 transition-transform duration-200 ${
+                      isMobileCategoriesOpen ? "rotate-180" : ""
+                    }`}
+                  ></i>
                 </button>
-                
+
                 <AnimatePresence>
                   {isMobileCategoriesOpen && (
                     <motion.div
@@ -259,7 +298,7 @@ function Header() {
               })}
             </div>
 
-            {/* Mobile Fixed Bottom CTA - Agora travado perfeitamente na base */}
+            {/* Mobile Fixed Bottom CTA */}
             <div className="flex-shrink-0 p-4 bg-white border-t border-gray-100 pb-safe-bottom mb-2">
               <a
                 href="https://wa.me/5511980129528"
