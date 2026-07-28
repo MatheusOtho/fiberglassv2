@@ -1,25 +1,38 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Suas importações de imagens
-import carrossel1 from "../../assets/home/carrossel/banco-moon-e-poltrona-living.jpg";
-import carrossel2 from "../../assets/home/carrossel/banco-moon-em-fibra.jpg";
-import carrossel3 from "../../assets/home/carrossel/banco-tablet-em-fibra.jpg";
-import carrossel4 from "../../assets/home/carrossel/cadeiras-eroticas-em-fibra.jpg";
-import carrossel5 from "../../assets/home/carrossel/decoracao-natalina-em-fibra.jpg";
-import carrossel6 from "../../assets/home/carrossel/decoracao-natalina-ursos-em-fibra.jpg";
-import carrossel7 from "../../assets/home/carrossel/escorregador-em-fibra.jpg";
-import carrossel8 from "../../assets/home/carrossel/letreiro-natalino-em-fibra.jpg";
-import carrossel9 from "../../assets/home/carrossel/mesas-em-fibra-de-vidro.jpg";
-import carrossel10 from "../../assets/home/carrossel/modulo-circular-em-fibra.jpg";
-import carrossel11 from "../../assets/home/carrossel/paisagismo-em-fibra.jpg";
-import carrossel12 from "../../assets/home/carrossel/poltrona-em-fibra-ball-e-quite.jpg";
-import carrossel13 from "../../assets/home/carrossel/poltrona-living.jpg";
-import carrossel14 from "../../assets/home/carrossel/poltrona-modelo-stone-em-fibra.jpg";
-import carrossel15 from "../../assets/home/carrossel/poltrona-quite-e-banco-tablet.jpg";
-import carrossel16 from "../../assets/home/carrossel/vasos-e-paisagismo-em-fibra.jpg";
+// Importações do PC (Desktop)
+import carrossel1 from "../../assets/home/carrossel/pc/banco-moon-e-poltrona-living.jpg";
+import carrossel2 from "../../assets/home/carrossel/pc/banco-moon-em-fibra.jpg";
+import carrossel3 from "../../assets/home/carrossel/pc/banco-tablet-em-fibra.jpg";
+import carrossel4 from "../../assets/home/carrossel/pc/cadeiras-eroticas-em-fibra.jpg";
+import carrossel5 from "../../assets/home/carrossel/pc/decoracao-natalina-em-fibra.jpg";
+import carrossel6 from "../../assets/home/carrossel/pc/decoracao-natalina-ursos-em-fibra.jpg";
+import carrossel7 from "../../assets/home/carrossel/pc/escorregador-em-fibra.jpg";
+import carrossel8 from "../../assets/home/carrossel/pc/letreiro-natalino-em-fibra.jpg";
+import carrossel9 from "../../assets/home/carrossel/pc/mesas-em-fibra-de-vidro.jpg";
+import carrossel10 from "../../assets/home/carrossel/pc/modulo-circular-em-fibra.jpg";
+import carrossel11 from "../../assets/home/carrossel/pc/paisagismo-em-fibra.jpg";
+import carrossel12 from "../../assets/home/carrossel/pc/poltrona-em-fibra-ball-e-quite.jpg";
+import carrossel13 from "../../assets/home/carrossel/pc/poltrona-living.jpg";
+import carrossel14 from "../../assets/home/carrossel/pc/poltrona-modelo-stone-em-fibra.jpg";
+import carrossel15 from "../../assets/home/carrossel/pc/poltrona-quite-e-banco-tablet.jpg";
+import carrossel16 from "../../assets/home/carrossel/pc/vasos-e-paisagismo-em-fibra.jpg";
 
-const SLIDES = [
+// Importações do Mobile (< 1024px)
+import mobile1 from "../../assets/home/carrossel/mobile/banco-safira.jpg";
+import mobile2 from "../../assets/home/carrossel/mobile/bolas-natalinas.jpg";
+import mobile3 from "../../assets/home/carrossel/mobile/cadeira-erotica-spicy.jpg";
+import mobile4 from "../../assets/home/carrossel/mobile/escorregador.jpg";
+import mobile5 from "../../assets/home/carrossel/mobile/letreiro-ho-ho-ho.jpg";
+import mobile6 from "../../assets/home/carrossel/mobile/mesa-cone.jpg";
+import mobile7 from "../../assets/home/carrossel/mobile/poltrona-ball.jpg";
+import mobile8 from "../../assets/home/carrossel/mobile/poltrona-quite.jpg";
+import mobile9 from "../../assets/home/carrossel/mobile/poltronas-stone.jpg";
+import mobile10 from "../../assets/home/carrossel/mobile/urso-natalino.jpg";
+import mobile11 from "../../assets/home/carrossel/mobile/vaso-quadrado.jpg";
+
+const DESKTOP_SLIDES = [
   { id: 1, img: carrossel1, title: "Banco Moon e Poltrona Living" },
   { id: 2, img: carrossel2, title: "Banco Moon em Fibra" },
   { id: 3, img: carrossel3, title: "Banco Tablet em Fibra" },
@@ -38,9 +51,43 @@ const SLIDES = [
   { id: 16, img: carrossel16, title: "Vasos de Luxo e Paisagismo" },
 ];
 
+const MOBILE_SLIDES = [
+  { id: 1, img: mobile1, title: "Banco Safira em Fibra" },
+  { id: 2, img: mobile2, title: "Bolas Natalinas Decorativas" },
+  { id: 3, img: mobile3, title: "Cadeira Erótica Spicy" },
+  { id: 4, img: mobile4, title: "Escorregador Revestido" },
+  { id: 5, img: mobile5, title: "Letreiro Ho Ho Ho" },
+  { id: 6, img: mobile6, title: "Mesa Cone Alto Padrão" },
+  { id: 7, img: mobile7, title: "Poltrona Ball Conceito" },
+  { id: 8, img: mobile8, title: "Poltrona Quite Design" },
+  { id: 9, img: mobile9, title: "Poltrona Stone Exclusiva" },
+  { id: 10, img: mobile10, title: "Urso Natalino em Fibra" },
+  { id: 11, img: mobile11, title: "Vaso Quadrado de Luxo" },
+];
+
 export function Carrossel() {
+  const [isMobileScreen, setIsMobileScreen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+
+  // Detecta se a tela é menor que 1024px (breakpoint 'lg' do Tailwind)
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobileScreen(window.innerWidth < 1024);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  // Seleciona a lista de slides correta dependendo da tela
+  const SLIDES = isMobileScreen ? MOBILE_SLIDES : DESKTOP_SLIDES;
+
+  // Reseta o índice se trocar de tela para evitar erros de array out-of-bounds
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [isMobileScreen]);
 
   const handleNext = () => {
     setDirection(1);
@@ -58,7 +105,7 @@ export function Carrossel() {
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [currentIndex]);
+  }, [currentIndex, SLIDES.length]);
 
   const slideVariants = {
     enter: (dir: number) => ({
@@ -110,7 +157,7 @@ export function Carrossel() {
           
           <AnimatePresence initial={false} custom={direction} mode="popLayout">
             <motion.div
-              key={currentIndex}
+              key={`${isMobileScreen ? 'mobile' : 'desktop'}-${currentIndex}`}
               custom={direction}
               variants={slideVariants}
               initial="enter"
