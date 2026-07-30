@@ -84,7 +84,7 @@ export function Destaques() {
     },
     {
       name: "Vasos Geométricos",
-      slug: "/categoria-paisagismo/vasos-geometricos",
+      slug: "/categoria-paisagismo/vaso-geometricos",
       category: "vasos",
       categoryLabel: "Vasos & Paisagismo",
       img: destaque9,
